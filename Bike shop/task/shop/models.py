@@ -26,14 +26,14 @@ class Bike(models.Model):
     name = models.CharField(max_length=default_length)
     description = models.TextField()
     has_basket = models.BooleanField(default=False)
-    frame = models.ForeignKey(Frame, on_delete=models.DO_NOTHING)
-    tire = models.ForeignKey(Tire, on_delete=models.DO_NOTHING)
-    seat = models.ForeignKey(Seat, on_delete=models.DO_NOTHING)
+    frame = models.ForeignKey(Frame, on_delete=models.PROTECT)
+    tire = models.ForeignKey(Tire, on_delete=models.PROTECT)
+    seat = models.ForeignKey(Seat, on_delete=models.PROTECT)
 
 
 class Order(models.Model):
     STATUSES = [('P', 'pending'), ('R', 'ready')]
-    bike = models.ForeignKey(Bike, on_delete=models.DO_NOTHING)
+    bike = models.ForeignKey(Bike, on_delete=models.PROTECT)
     name = models.CharField(max_length=default_length)
     surname = models.CharField(max_length=default_length)
     phone_number = models.CharField(max_length=default_length)
