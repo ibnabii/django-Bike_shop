@@ -1,0 +1,15 @@
+<html><body><h5 id="description">Description</h5>
+<p>We have the database up and running; it's time to fill it with data on your shop's bikes! The staff needs the admin panel where they can add all the relevant information on available bikes and parts. </p>
+<p>It would be best if you also started working on the actual website. Perhaps, having the main page with all the available bikes would make a good start?</p>
+<p>Let's start with the admin panel! First, you need to register all the models in the <em>admin.py</em> file. Once you've done it, it's time to create a superuser — use the username, email address, and password of your choice. Next, log in to the admin panel (it should be available at <em>localhost:8000/admin/) </em>and add some data. Remember to start with frames, seats, tires, and available baskets. After this, build some bikes out of the available components. Adding 2-3 cycles of different frame colors, seats, and tire types is a good idea. Add some variations with baskets; it will make the testing easier in the later stages. Please don't add any orders for now; they are for later stages.</p>
+<p></p><div class="alert alert-warning">If you want to make your admin panel more user-friendly and display the name of your bike instead of <code class="java">Bike object (1)</code>,<em> </em>use the<em> </em><code class="java">__str__()</code> method. You can read more on the method in the <a href="https://docs.djangoproject.com/en/4.0/ref/models/instances/#str" rel="noopener noreferrer nofollow" target="_blank">official documentation</a>.</div><p></p>
+<p>It would also be great to see the bikes listed nicely on the website, wouldn't it? Let's draw up such a page. Create a dedicated view, the <em>urls.py</em> file, with relevant content and add a template. The page should be available at <em>localhost:8000/bikes/. </em>There is only one requirement on how the page should look — all the bikes from the database should be displayed as separate elements of the unordered list; all the rest is up to you. Check the screenshot below as a reference.</p>
+<h5 id="objectives">Objectives</h5>
+<ul>
+<li>Add the admin panel and create the superuser;</li>
+<li>Add some bike parts and build some custom bikes;</li>
+<li>Create the <em>url.py </em>file with a dedicated view and list the bikes as separate elements of the unordered list.</li>
+</ul>
+<h5 id="example">Example</h5>
+<p><strong>Example 1: </strong><em>An</em><strong> </strong><em>example of the /bikes/ page.</em></p>
+<p><img alt="" height="254" name="bikeshop_main view.png" src="https://ucarecdn.com/e8472a45-5f7a-4f19-936f-ac870fa27774/" width="441"/></p></body></html>
