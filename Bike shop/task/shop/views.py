@@ -4,6 +4,16 @@ from django.shortcuts import render
 from django.http import Http404
 
 from . import models
+from .forms import OrderForm
+
+
+def bike_available(bike: models.Bike) -> bool:
+    if bike.has_basket:
+        if models.Basket.objects.filter(quantity__gt=0).first() is None:
+            return False
+    if bike.frame.quantity < 1 or bike.tire.quantity < 2 or bike.seat.quantity < 1:
+        return False
+    return True
 
 
 class BikeListView(View):
@@ -23,11 +33,14 @@ class BikeDetailsView(TemplateView):
         except models.Bike.DoesNotExist:
             raise Http404
 
-        if (bike.has_basket == True):
+        if bike.has_basket:
             bike.has_basket = 'yes'
         else:
             bike.has_basket = 'no'
 
+        bike.available = bike_available(bike)
+
         context = super().get_context_data(**kwargs)
         context['bike'] = bike
+        context['orderform'] = OrderForm()
         return context

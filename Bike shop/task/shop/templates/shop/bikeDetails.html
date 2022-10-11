@@ -11,5 +11,10 @@
 <p>tires: {{bike.tire}}</p>
 <p>basket: {{bike.has_basket}}</p>
 <p>description: {{bike.description}}</p>
+{% if bike.available %}
+{% include 'shop/orderForm.html' %}
+{% else %}
+<b>Unfortunately, this bike is currently not available.</b>
+{% endif %}
 </body>
 </html>
