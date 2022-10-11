@@ -1,6 +1,7 @@
 from django.views import View
 from django.views.generic.base import TemplateView
-from django.shortcuts import render
+from django.views.generic.detail import DetailView
+from django.shortcuts import render, redirect
 from django.http import Http404
 
 from . import models
@@ -42,5 +43,38 @@ class BikeDetailsView(TemplateView):
 
         context = super().get_context_data(**kwargs)
         context['bike'] = bike
-        context['orderform'] = OrderForm()
+        form = OrderForm()
+        form.initial['bike'] = bike_id
+        context['orderform'] = form
         return context
+
+    def post(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        form = OrderForm(self.request.POST)
+        if form.is_valid():
+            order = form.save()
+
+            frame = models.Frame.objects.get(id=order.bike.frame.id)
+            frame.quantity -= 1
+            frame.save()
+
+            tire = models.Tire.objects.get(id=order.bike.tire.id)
+            tire.quantity -= 2
+            tire.save()
+
+            seat = models.Seat.objects.get(id=order.bike.seat.id)
+            seat.quantity -= 1
+            seat.save()
+
+            if order.bike.has_basket:
+                basket = models.Basket.objects.filter(quantity__gt=0).first()
+                basket.quantity -= 1
+                basket.save()
+
+            return redirect('order_confirmation', order.id)
+        return render(request, self.template_name, {'orderform': form})
+
+
+class OrderConfirmationView(DetailView):
+    model = models.Order
+    # template_name = 'shop/orderConfirmation.html'

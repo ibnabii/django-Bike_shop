@@ -52,5 +52,4 @@ class Order(models.Model):
     phone_number = models.CharField(max_length=default_length)
     status = models.CharField(max_length=1, choices=STATUSES, default='pending')
 
-list_of_models = [Frame, Seat, Tire, Basket, Bike, Order
-                  ]
+list_of_models = [Frame, Seat, Tire, Basket, Bike, Order]

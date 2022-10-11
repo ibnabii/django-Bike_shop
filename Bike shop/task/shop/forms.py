@@ -5,8 +5,8 @@ from .models import Order
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ['name', 'surname', 'phone_number']
-
+        fields = ['name', 'surname', 'phone_number', 'bike']
+        widgets = {'bike': forms.HiddenInput()}
         labels = {
             "name": "your name",
             "surname": "your surname",
